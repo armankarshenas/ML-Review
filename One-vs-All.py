@@ -53,15 +53,16 @@ def train_one_vs_all(label,X):
         y_pred = Sigmoid(np.matmul(X,w))
         loss = BinaryLoss(label,y_pred)
         cost.append(loss)
-        if abs(cost[-1] - cost[-1]) <= 0.001:
-            return w
-    return w
+        if abs(cost[-1] - cost[-2]) <= 0.0001:
+            return w,cost
+    return w,cost
 
 
 for digit in (np.sort(np.unique(y_train))):
     cond_idx = y_train == digit
     y_local = np.array(cond_idx).astype(int)
-    model_local = train_one_vs_all(y_local,X_train)
+    model_local,loss_local = train_one_vs_all(y_local,X_train)
     models.append(model_local)
+    str_to_print = "Classifier for {digit} has the following cost {cost}".format(digit=digit,cost=loss_local)
+    print(str_to_print)
 
-print(np.shape(models))
