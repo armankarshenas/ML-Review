@@ -4,14 +4,6 @@ from torchvision import datasets
 from matplotlib import pyplot as plt
 from tqdm import tqdm
 
-
-
-data_train = datasets.MNIST(root=".",download=True, train=True)
-data_test = datasets.MNIST(root=".",download=True,train=False)
-
-print(np.shape(data_test),np.shape(data_train))
-
-
 def feature_matrix(dataset):
     n = len(dataset)
     pic_template = np.array(dataset[0][0])
@@ -47,4 +39,3 @@ def observation_labels(dataset):
 
 
 
-X_train = feature_matrix(data_train)
