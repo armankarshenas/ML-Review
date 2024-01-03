@@ -34,7 +34,10 @@ def feature_matrix_with_normalization(dataset):
 def observation_labels(dataset):
     label = [ent[1] for ent in dataset]
     label = np.array(label)
-    label = np.reshape(label,[len(label),1])
+    return label
+def observation_labels_binary(dataset):
+    label = [ent[1]%2 for ent in dataset]
+    label = np.array(label)
     return label
 
 
